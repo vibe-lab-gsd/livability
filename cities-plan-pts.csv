@@ -1,0 +1,370 @@
+﻿Place,State,Plan-pts
+Torrington,CT,0
+Chicago,IL,20
+Naperville,IL,15
+Des Plaines,IL,15
+Downers Grove,IL,15
+Carbondale,IL,13
+Evanston,IL,13
+Skokie,IL,13
+Elgin,IL,10
+Schaumburg,IL,4
+Urbana,IL,0
+Bloomington,IL,0
+Canton,IL,0
+Centralia,IL,0
+Champaign,IL,0
+Charleston,IL,0
+Mattoon,IL,0
+Bolingbrook,IL,0
+Danville,IL,0
+Decatur,IL,0
+Dixon,IL,0
+Effingham,IL,0
+Freeport,IL,0
+Galesburg,IL,0
+Jacksonville,IL,0
+Kankakee,IL,0
+Lincoln,IL,0
+Macomb,IL,0
+Marion,IL,0
+Herrin,IL,0
+Mount Vernon,IL,0
+Ottawa,IL,0
+Peoria,IL,0
+Pontiac,IL,0
+Rochelle,IL,0
+Rockford,IL,0
+Springfield,IL,0
+Sterling,IL,0
+Taylorville,IL,0
+Quincy,IL,0
+Lafayette,IN,21
+West Lafayette,IN,21
+Bloomington,IN,18
+Indianapolis,IN,18
+Richmond,IN,16
+Muncie,IN,13
+South Bend,IN,13
+Evansville,IN,11
+Fort Wayne,IN,10
+Goshen,IN,7
+Carmel,IN,5
+Michigan City,IN,1
+Angola,IN,0
+Auburn,IN,0
+Bedford,IN,0
+Columbus,IN,0
+Connersville,IN,0
+Crawfordsville,IN,0
+Decatur,IN,0
+Elkhart,IN,0
+Frankfort,IN,0
+Greencastle,IN,0
+Greensburg,IN,0
+Huntington,IN,0
+Anderson,IN,0
+Greenwood,IN,0
+Jasper,IN,0
+Kendallville,IN,0
+Kokomo,IN,0
+Logansport,IN,0
+Madison,IN,0
+Marion,IN,0
+La Porte,IN,0
+Monticello,IN,0
+New Castle,IN,0
+Peru,IN,0
+Plymouth,IN,0
+Seymour,IN,0
+Mishawaka,IN,0
+Terre Haute,IN,0
+Vincennes,IN,0
+Wabash,IN,0
+Warsaw,IN,0
+Washington,IN,0
+Augusta,ME,0
+Waterville,ME,0
+Bangor,ME,0
+Lewiston,ME,0
+Auburn,ME,0
+Worcester,MA,20
+Northampton,MA,19
+Fitchburg,MA,18
+Amherst Town,MA,17
+Greenfield,MA,13
+Pittsfield,MA,13
+Holyoke,MA,11
+Springfield,MA,11
+Leominster,MA,0
+Kalamazoo,MI,20
+Ann Arbor,MI,15
+Detroit,MI,13
+Lansing,MI,13
+Battle Creek,MI,12
+Jackson,MI,9
+Traverse City,MI,8
+East Lansing,MI,5
+Adrian,MI,0
+Alma,MI,0
+Alpena,MI,0
+Bay City,MI,0
+Big Rapids,MI,0
+Cadillac,MI,0
+Coldwater,MI,0
+Dearborn,MI,0
+Livonia,MI,0
+Troy,MI,0
+Farmington Hills,MI,0
+Warren,MI,0
+Novi,MI,0
+Pontiac,MI,0
+Southfield,MI,0
+Escanaba,MI,0
+Flint,MI,0
+Grand Rapids,MI,0
+Kentwood,MI,0
+Wyoming,MI,0
+Hillsdale,MI,0
+Holland,MI,0
+Houghton,MI,0
+Portage,MI,0
+Ludington,MI,0
+Marquette,MI,0
+Midland,MI,0
+Monroe,MI,0
+Mount Pleasant,MI,0
+Muskegon,MI,0
+Norton Shores,MI,0
+Niles,MI,0
+Owosso,MI,0
+Petoskey,MI,0
+Saginaw,MI,0
+Sault Ste. Marie,MI,0
+Sturgis,MI,0
+Iron Mountain,MI,0
+Minneapolis,MN,21
+Edina,MN,21
+Northfield,MN,19
+St. Paul,MN,18
+Faribault,MN,17
+St. Cloud,MN,17
+Albert Lea,MN,16
+Duluth,MN,14
+Burnsville,MN,14
+St. Louis Park,MN,14
+Rochester,MN,14
+Red Wing,MN,12
+Minnetonka,MN,9
+Eden Prairie,MN,4
+Alexandria,MN,0
+Austin,MN,0
+Bemidji,MN,0
+Brainerd,MN,0
+Detroit Lakes,MN,0
+Fairmont,MN,0
+Fergus Falls,MN,0
+Grand Rapids,MN,0
+Hutchinson,MN,0
+Mankato,MN,0
+Marshall,MN,0
+Bloomington,MN,0
+Eagan,MN,0
+Plymouth,MN,0
+New Ulm,MN,0
+Owatonna,MN,0
+Willmar,MN,0
+Winona,MN,0
+Worthington,MN,0
+Concord,NH,15
+Nashua,NH,13
+Hanover,NH,12
+Keene,NH,11
+Laconia,NH,10
+Manchester,NH,7
+Lebanon,NH,5
+Claremont,NH,0
+Rochester,NY,19
+Albany,NY,10
+Schenectady,NY,10
+Kingston,NY,10
+Binghamton,NY,9
+Oneonta,NY,4
+Troy,NY,0
+Amsterdam,NY,0
+Auburn,NY,0
+Batavia,NY,0
+Buffalo,NY,0
+Cheektowaga,NY,0
+Lowell,MA,8
+Newton,MA,19
+Brockton,MA,10
+Attleboro,MA,19
+North Attleborough Town,MA,4
+Corning,NY,0
+Cortland,NY,0
+Elmira,NY,0
+Glens Falls,NY,0
+Gloversville,NY,0
+Hudson,NY,0
+Ithaca,NY,0
+Jamestown,NY,0
+Dunkirk,NY,0
+Poughkeepsie,NY,0
+Newburgh,NY,0
+Kiryas Joel,NY,0
+Woodbury,NY,0
+Ogdensburg,NY,0
+Massena,NY,0
+Monticello,NY,0
+Olean,NY,0
+Plattsburgh,NY,0
+Seneca Falls,NY,0
+Syracuse,NY,0
+Rome,NY,0
+Utica,NY,0
+Watertown,NY,0
+Fort Drum,NY,0
+Bismarck,ND,8
+Dickinson,ND,0
+Jamestown,ND,0
+Minot,ND,0
+Williston,ND,0
+Fargo,ND,0
+Grand Forks,ND,0
+Wahpeton,ND,0
+Cleveland,OH,21
+Cincinnati,OH,19
+Columbus,OH,15
+Wooster,OH,6
+Dayton,OH,5
+Athens,OH,2
+Akron,OH,0
+Ashland,OH,0
+Bellefontaine,OH,0
+Bucyrus,OH,0
+Cambridge,OH,0
+Canton,OH,0
+Massillon,OH,0
+Celina,OH,0
+Chillicothe,OH,0
+Coshocton,OH,0
+Kettering,OH,0
+Beavercreek,OH,0
+Defiance,OH,0
+Findlay,OH,0
+Fremont,OH,0
+Gallipolis,OH,0
+Greenville,OH,0
+Lima,OH,0
+Mansfield,OH,0
+Marietta,OH,0
+Marion,OH,0
+Mount Vernon,OH,0
+New Philadelphia,OH,0
+Dover,OH,0
+Norwalk,OH,0
+Portsmouth,OH,0
+Salem,OH,0
+Sandusky,OH,0
+Sidney,OH,0
+Springfield,OH,0
+Tiffin,OH,0
+Toledo,OH,0
+Urbana,OH,0
+Van Wert,OH,0
+Wapakoneta,OH,0
+Washington Court House,OH,0
+Wilmington,OH,0
+Youngstown,OH,0
+Warren,OH,0
+Zanesville,OH,0
+Indiana,PA,25
+Bethlehem,PA,22
+Meadville,PA,21
+Allentown,PA,18
+State College,PA,18
+Carlisle,PA,17
+Pittsburgh,PA,15
+Lancaster,PA,14
+Lewisburg,PA,13
+Reading,PA,5
+Altoona,PA,0
+Bloomsburg,PA,0
+Berwick,PA,0
+Bradford,PA,0
+Chambersburg,PA,0
+DuBois,PA,0
+East Stroudsburg,PA,0
+Erie,PA,0
+Gettysburg,PA,0
+Harrisburg,PA,0
+Hemlock Farms,PA,0
+Hermitage,PA,0
+Huntingdon,PA,0
+Johnstown,PA,0
+Lebanon,PA,0
+Lewistown,PA,0
+Lock Haven,PA,0
+Oil City,PA,0
+Pottsville,PA,0
+Sayre,PA,0
+Scranton,PA,0
+Wilkes-Barre,PA,0
+Selinsgrove,PA,0
+Somerset,PA,0
+St. Marys,PA,0
+Sunbury,PA,0
+Warren,PA,0
+Williamsport,PA,0
+York,PA,0
+Hanover,PA,0
+Barre,VT,17
+Hartford Village,VT,16
+Brattleboro,VT,15
+Randolph,VT,9
+Woodstock,VT,8
+Essex Junction,VT,7
+Milton,VT,7
+Bennington,VT,6
+Burlington,VT,6
+St. Albans,VT,6
+South Burlington,VT,5
+Winooski,VT,5
+Rutland,VT,5
+Chelsea,VT,0
+Milwaukee,WI,20
+La Crosse,WI,18
+Appleton,WI,8
+Stevens Point,WI,7
+Eau Claire,WI,6
+Oshkosh,WI,6
+Sheboygan,WI,1
+Baraboo,WI,0
+Beaver Dam,WI,0
+Fond du Lac,WI,0
+Green Bay,WI,0
+Beloit,WI,0
+Janesville,WI,0
+Kenosha,WI,0
+Madison,WI,0
+Manitowoc,WI,0
+Menomonie,WI,0
+Waukesha,WI,0
+Neenah,WI,0
+Platteville,WI,0
+Racine,WI,0
+Mount Pleasant,WI,0
+Rice Lake,WI,0
+Shawano,WI,0
+Sparta,WI,0
+Plover,WI,0
+Watertown,WI,0
+Fort Atkinson,WI,0
+Wausau,WI,0
+Whitewater,WI,0
+Elkhorn,WI,0
+Wisconsin Rapids,WI,0
+Marshfield,WI,0
+Marinette,WI,0
+Onalaska,WI,0

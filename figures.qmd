@@ -1,0 +1,242 @@
+---
+title: "Livability Figures"
+html:
+  self-contained: true   
+editor: visual
+---
+
+These are some figures for the livability paper
+
+## Load packages
+
+```{r, message=FALSE, results='hide'}
+#| code-fold: true
+
+library(here)
+library(tidyverse)
+library(sf)
+library(tigris)
+library(rnaturalearth)
+library(ggthemes)
+library(GGally)
+
+sf_use_s2(FALSE)
+```
+
+## Load data
+
+City-level data assembled in data-assembly.
+
+```{r, message=FALSE, results='hide'}
+#| code-fold: true
+
+city_data <- here("data-for-figs.geojson") |>
+  st_read()
+```
+
+Create a basic basemap.
+
+```{r, message=FALSE, results='hide'}
+#| code-fold: true
+
+states_map <- states() |>
+  filter(STUSPS %in% c("RI", 
+                       "NJ",
+                       "CT",
+                       "IL",
+                       "IN",
+                       "MA",
+                       "ME",
+                       "MN",
+                       "MI",
+                       "ND",
+                       "NH",
+                       "NY",
+                       "OH",
+                       "PA",
+                       "VT",
+                       "WI")) 
+
+great_lakes <- ne_download(type = "lakes", category = "physical", scale = 50) |>
+  st_transform(crs = st_crs(states_map)) |>
+  st_filter(states_map)
+
+cape_cod <- area_water(state = "MA", county = c("Barnstable", 
+                                                "Plymouth", 
+                                                "Suffolk",
+                                                "Nantucket",
+                                                "Dukes"))
+
+long_island <- area_water(state = "NY", county = c("Suffolk", 
+                                                   "Nassau",
+                                                   "Queens",
+                                                   "Kings",
+                                                   "New York"))
+
+nj_water <- area_water(state = "NJ", county = c("Bergen", 
+                                                "Hudson",
+                                                "Union",
+                                                "Middlesex",
+                                                "Monmouth"))
+
+crs_frostbelt = "+proj=lcc +lat_0=39 +lon_0=-89 +lat_1=37 +lat_2=47 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs +type=crs"
+
+base_map <- ggplot(states_map) +
+  geom_sf(fill = "gray90",
+          color = "white") +
+  geom_sf(data = great_lakes,
+          color = NA, 
+          fill = "white") +
+  geom_sf(data = cape_cod, fill = "white", color = NA) +
+  geom_sf(data = long_island, fill = "white", color = NA) +
+  geom_sf(data = nj_water, fill = "white", color = NA)  +
+  theme_map()
+
+```
+
+## Maps
+
+Here is a map showing spatial variation in housing affordability.
+
+```{r}
+#| code-fold: true
+
+base_map +
+  geom_sf(data = city_data,
+          color = NA,
+          aes(fill = housing_trunc)) +
+  scale_fill_viridis_c(name = "Median housing\ncosts as a share\nof median income",
+                       breaks = seq(0.25, 0.5, by=0.05),
+                       labels = c(paste0(seq(25, 45, by=5),"%"), "50% or more")) +
+  coord_sf(crs = crs_frostbelt)
+
+
+```
+
+And unemployment.
+
+```{r}
+#| code-fold: true
+
+base_map +
+  geom_sf(data = city_data,
+          color = NA,
+          aes(fill = unemp_trunc)) +
+  scale_fill_viridis_c(name = "Unemployment\nrate",
+                       breaks = seq(0, 0.1, by = 0.02),
+                       labels = c(paste0(seq(0, 8, by=2), "%"), "10% or more")) +
+  coord_sf(crs = crs_frostbelt)
+```
+
+And transportation access.
+
+```{r}
+#| code-fold: true
+
+base_map +
+  geom_sf(data = city_data,
+          color = NA,
+          aes(fill = access_trunc)) +
+  scale_fill_viridis_c(name = "Car-free\naccessibility\n(relative to\naccess by car",
+                       breaks = seq(0.05, 0.35, by = 0.05),
+                       labels = c("5% or less", 
+                                  paste0(seq(10, 35, by=5), "%")),
+                       direction = -1) +
+  coord_sf(crs = crs_frostbelt)
+```
+
+And adaptation plan (or hazard mitigation plan) quality
+
+```{r}
+#| code-fold: true
+
+base_map +
+  geom_sf(data = city_data,
+          color = NA,
+          aes(fill = plan_pts)) +
+  scale_fill_viridis_c(name = "Plan quality",
+                       breaks = seq(0, 25, by = 5),
+                       direction = -1) +
+  coord_sf(crs = crs_frostbelt)
+```
+
+## Scatter plots
+
+This one isn't necessarily for the publication, but just for a quick look.
+
+```{r, message=FALSE, warning=FALSE}
+#| code-fold: true
+
+ggpairs(
+  city_data,
+  columns = c(2,4, 6, 8),          # Select numeric columns
+  aes(size = populationE),   # Map color to a factor
+  upper = list(continuous = wrap("cor", size = 4)), # Show correlation in upper panel
+  lower = list(continuous = wrap("points", alpha = 0.6, size = 1.5))
+)
+
+
+
+```
+
+### Comparing plan quality with transportation
+
+```{r}
+#| code-fold: true
+
+ggplot(city_data) +
+  geom_point(aes(x = plan_pts,
+                 y = avg_access_ratio,
+                 size = populationE),
+             alpha = 0.4) +
+  scale_x_continuous(name = "Plan quality score") +
+  scale_y_continuous(
+    name = "Ratio of car-free accessibilty\nto accessibilty by car") +
+  scale_size(name = "Population",
+             breaks = breaks <- c(2*10^seq(2:7)),
+             labels = formatC(breaks, format = "d", big.mark = ",")) +
+  theme_minimal()
+
+```
+
+### Comparing plan quality with housing
+
+```{r}
+#| code-fold: true
+
+ggplot(city_data) +
+  geom_point(aes(x = plan_pts,
+                 y = housing_trunc,
+                 size = populationE),
+             alpha = 0.4) +
+  scale_x_continuous(name = "Plan quality score") +
+  scale_y_reverse(
+    name = "Ratio of median housing costs\nto median income",
+    breaks = seq(0.1, 0.5, by = 0.05),
+    labels = c(seq(0.1, 0.45, by= 0.05), "0.5 or more")) +
+  scale_size(name = "Population",
+             breaks = breaks <- c(2*10^seq(2:7)),
+             labels = formatC(breaks, format = "d", big.mark = ",")) +
+  theme_minimal()
+```
+
+### Comparing plan quality to unemployement
+
+```{r}
+#| code-fold: true
+
+ggplot(city_data) +
+  geom_point(aes(x = plan_pts,
+                 y = unemp_trunc,
+                 size = populationE),
+             alpha = 0.4) +
+  scale_x_continuous(name = "Plan quality score") +
+  scale_y_reverse(
+    name = "Unemployment rate",
+    breaks = seq(0, 0.1, by = 0.02),
+    labels = c(paste0(seq(0, 8, by= 2), "%"), "10% or more")) +
+  scale_size(name = "Population",
+             breaks = breaks <- c(2*10^seq(2:7)),
+             labels = formatC(breaks, format = "d", big.mark = ",")) +
+  theme_minimal()
+```
