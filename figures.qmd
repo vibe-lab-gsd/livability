@@ -9,7 +9,7 @@ These are some figures for the livability paper
 
 ## Load packages
 
-```{r, message=FALSE, results='hide'}
+```{r, message=FALSE, results='hide', warning=FALSE}
 #| code-fold: true
 
 library(here)
