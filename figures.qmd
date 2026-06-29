@@ -1,7 +1,8 @@
 ---
 title: "Livability Figures"
-html:
-  self-contained: true   
+format:
+  html:
+    self-contained: true   
 editor: visual
 ---
 
