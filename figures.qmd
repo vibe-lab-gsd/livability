@@ -30,8 +30,10 @@ City-level data assembled in data-assembly.
 ```{r, message=FALSE, results='hide'}
 #| code-fold: true
 
-city_data <- here("data-for-figs.geojson") |>
-  st_read()
+city_data <- here("final_fig_data.geojson") |>
+  st_read() |>
+  mutate(migr_pct_trunc = ifelse(migration_pct < -0.05, -0.05, migration_pct)) |>
+  mutate(migr_pct_trunc = ifelse(migr_pct_trunc > 0.05, 0.05, migr_pct_trunc))
 ```
 
 Create a basic basemap.
@@ -145,7 +147,25 @@ base_map +
   coord_sf(crs = crs_frostbelt)
 ```
 
-And adaptation plan (or hazard mitigation plan) quality
+And net in-migration from to its county from counties outside the frost-belt
+
+```{r}
+#| code-fold: true
+
+base_map +
+  geom_sf(data = city_data,
+          color = NA,
+          aes(fill = migr_pct_trunc)) +
+  scale_fill_gradient2(name = "Net in-migration from\noutside of frostbelt\nrelative to current population",
+                       breaks = c(-0.05, -0.025, 0.025, 0.05),
+                       labels = c("Lost more than 5 percent",
+                                  "Lost 2.5 percent",
+                                  "Gained 2.5 percent",
+                                  "Gained more than 5 percent")) +
+  coord_sf(crs = crs_frostbelt)
+```
+
+And finally, adaptation plan (or hazard mitigation plan) quality
 
 ```{r}
 #| code-fold: true
@@ -160,26 +180,126 @@ base_map +
   coord_sf(crs = crs_frostbelt)
 ```
 
-## Scatter plots
+## Clusters
 
-This one isn't necessarily for the publication, but just for a quick look.
+We used k-means clustering to identify five types of frostbelt city. Here's how the clusters map onto plan scores.
 
-```{r, message=FALSE, warning=FALSE}
-#| code-fold: true
+```{r}
 
-ggpairs(
-  city_data,
-  columns = c(2,4, 6, 8),          # Select numeric columns
-  aes(size = populationE),   # Map color to a factor
-  upper = list(continuous = wrap("cor", size = 4)), # Show correlation in upper panel
-  lower = list(continuous = wrap("points", alpha = 0.6, size = 1.5))
-)
-
-
-
+ggplot(city_data) +
+  geom_violin(aes(x = cluster, y = plan_pts,
+                  fill = cluster),
+              alpha = 0.2) +
+  geom_jitter(aes(x = cluster, y = plan_pts,
+                  color = cluster),
+              alpha = 0.2) +
+  scale_fill_brewer(type = "qual", palette = 2) +
+  scale_color_brewer(type = "qual", palette = 2) +
+  scale_y_continuous(name = "Plan quality score") +
+  theme_minimal()
 ```
 
-### Comparing plan quality with transportation
+Here's how the clusters map onto population.
+
+```{r}
+ggplot(city_data) +
+  geom_violin(aes(x = cluster, y = populationE,
+                  fill = cluster),
+              alpha = 0.2) +
+  geom_jitter(aes(x = cluster, y = populationE,
+                  color = cluster),
+              alpha = 0.2) +
+  scale_fill_brewer(type = "qual", palette = 2) +
+  scale_color_brewer(type = "qual", palette = 2) +
+  scale_y_continuous(name = "Population",
+                     transform = "log",
+                     breaks = breaks <- 10^seq(2, 9, by=1),
+                     labels = formatC(breaks, format = "d", big.mark = ",")) +
+  theme_minimal()
+```
+
+And for unemployment.
+
+```{r}
+
+ggplot(city_data) +
+  geom_violin(aes(x = cluster, y = unemp,
+                  fill = cluster),
+              alpha = 0.2) +
+  geom_jitter(aes(x = cluster, y = unemp,
+                  color = cluster),
+              alpha = 0.2) +
+  scale_fill_brewer(type = "qual", palette = 2) +
+  scale_color_brewer(type = "qual", palette = 2) +
+  scale_y_continuous(name = "Umemployment rate") +
+  theme_minimal()
+```
+
+And housing affordability.
+
+```{r}
+
+ggplot(city_data) +
+  geom_violin(aes(x = cluster, y = housing,
+                  fill = cluster),
+              alpha = 0.2) +
+  geom_jitter(aes(x = cluster, y = housing,
+                  color = cluster),
+              alpha = 0.2) +
+  scale_fill_brewer(type = "qual", palette = 2) +
+  scale_color_brewer(type = "qual", palette = 2) +
+  scale_y_continuous(name = "Housing cost as share of income") +
+  theme_minimal()
+```
+
+And transportation access.
+
+```{r}
+ggplot(city_data) +
+  geom_violin(aes(x = cluster, y = avg_access_ratio,
+                  fill = cluster),
+              alpha = 0.2) +
+  geom_jitter(aes(x = cluster, y = avg_access_ratio,
+                  color = cluster),
+              alpha = 0.2) +
+  scale_fill_brewer(type = "qual", palette = 2) +
+  scale_color_brewer(type = "qual", palette = 2) +
+  scale_y_continuous(name = "Share of car-accessible places that are\naccessible without a car") +
+  theme_minimal()
+```
+
+And for net in-migration from beyond the frostbelt.
+
+```{r}
+ggplot(city_data) +
+  geom_violin(aes(x = cluster, y = migration_pct,
+                  fill = cluster),
+              alpha = 0.2) +
+  geom_jitter(aes(x = cluster, y = migration_pct,
+                  color = cluster),
+              alpha = 0.2) +
+  scale_fill_brewer(type = "qual", palette = 2) +
+  scale_color_brewer(type = "qual", palette = 2) +
+  scale_y_continuous(name = "Net In-migration\nas a share of current population") +
+  theme_minimal()
+```
+
+Here's how the clusters map spatially.
+
+```{r}
+#| code-fold: true
+
+base_map +
+  geom_sf(data = city_data,
+          color = NA,
+          aes(fill = cluster)) +
+  scale_fill_brewer(type = "qual", palette = 2) +
+  coord_sf(crs = crs_frostbelt)
+```
+
+## Scatter plots
+
+Comparing plan quality with transportation
 
 ```{r}
 #| code-fold: true
@@ -187,7 +307,8 @@ ggpairs(
 ggplot(city_data) +
   geom_point(aes(x = plan_pts,
                  y = avg_access_ratio,
-                 size = populationE),
+                 size = populationE,
+                 color = cluster),
              alpha = 0.4) +
   scale_x_continuous(name = "Plan quality score") +
   scale_y_continuous(
@@ -195,6 +316,7 @@ ggplot(city_data) +
   scale_size(name = "Population",
              breaks = breaks <- c(2*10^seq(2:7)),
              labels = formatC(breaks, format = "d", big.mark = ",")) +
+  scale_color_brewer(type = "qual", palette = 2) +
   theme_minimal()
 
 ```
@@ -207,7 +329,8 @@ ggplot(city_data) +
 ggplot(city_data) +
   geom_point(aes(x = plan_pts,
                  y = housing_trunc,
-                 size = populationE),
+                 size = populationE,
+                 color = cluster),
              alpha = 0.4) +
   scale_x_continuous(name = "Plan quality score") +
   scale_y_reverse(
@@ -217,6 +340,7 @@ ggplot(city_data) +
   scale_size(name = "Population",
              breaks = breaks <- c(2*10^seq(2:7)),
              labels = formatC(breaks, format = "d", big.mark = ",")) +
+  scale_color_brewer(type = "qual", palette = 2) +
   theme_minimal()
 ```
 
@@ -228,7 +352,8 @@ ggplot(city_data) +
 ggplot(city_data) +
   geom_point(aes(x = plan_pts,
                  y = unemp_trunc,
-                 size = populationE),
+                 size = populationE,
+                 color = cluster),
              alpha = 0.4) +
   scale_x_continuous(name = "Plan quality score") +
   scale_y_reverse(
@@ -238,5 +363,27 @@ ggplot(city_data) +
   scale_size(name = "Population",
              breaks = breaks <- c(2*10^seq(2:7)),
              labels = formatC(breaks, format = "d", big.mark = ",")) +
+  scale_color_brewer(type = "qual", palette = 2) +
+  theme_minimal()
+```
+
+### Comparing plan quality to migration
+
+```{r}
+ggplot(city_data) +
+  geom_point(aes(x = plan_pts,
+                 y = migration_pct,
+                 size = populationE,
+                 color = cluster),
+             alpha = 0.4) +
+  scale_x_continuous(name = "Plan quality score") +
+  # scale_y_reverse(
+  #   name = "Unemployment rate",
+  #   breaks = seq(0, 0.1, by = 0.02),
+  #   labels = c(paste0(seq(0, 8, by= 2), "%"), "10% or more")) +
+  scale_size(name = "Population",
+             breaks = breaks <- c(2*10^seq(2:7)),
+             labels = formatC(breaks, format = "d", big.mark = ",")) +
+  scale_color_brewer(type = "qual", palette = 2) +
   theme_minimal()
 ```
