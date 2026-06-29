@@ -185,6 +185,7 @@ base_map +
 We used k-means clustering to identify five types of frostbelt city. Here's how the clusters map onto plan scores.
 
 ```{r}
+#| code-fold: true
 
 ggplot(city_data) +
   geom_violin(aes(x = cluster, y = plan_pts,
@@ -202,6 +203,8 @@ ggplot(city_data) +
 Here's how the clusters map onto population.
 
 ```{r}
+#| code-fold: true
+
 ggplot(city_data) +
   geom_violin(aes(x = cluster, y = populationE,
                   fill = cluster),
@@ -221,6 +224,7 @@ ggplot(city_data) +
 And for unemployment.
 
 ```{r}
+#| code-fold: true
 
 ggplot(city_data) +
   geom_violin(aes(x = cluster, y = unemp,
@@ -238,6 +242,7 @@ ggplot(city_data) +
 And housing affordability.
 
 ```{r}
+#| code-fold: true
 
 ggplot(city_data) +
   geom_violin(aes(x = cluster, y = housing,
@@ -255,6 +260,8 @@ ggplot(city_data) +
 And transportation access.
 
 ```{r}
+#| code-fold: true
+
 ggplot(city_data) +
   geom_violin(aes(x = cluster, y = avg_access_ratio,
                   fill = cluster),
@@ -271,6 +278,8 @@ ggplot(city_data) +
 And for net in-migration from beyond the frostbelt.
 
 ```{r}
+#| code-fold: true
+
 ggplot(city_data) +
   geom_violin(aes(x = cluster, y = migration_pct,
                   fill = cluster),
@@ -370,6 +379,8 @@ ggplot(city_data) +
 ### Comparing plan quality to migration
 
 ```{r}
+#| code-fold: true
+
 ggplot(city_data) +
   geom_point(aes(x = plan_pts,
                  y = migration_pct,
